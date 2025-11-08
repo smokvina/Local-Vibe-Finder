@@ -1,0 +1,7 @@
+{
+  "name": "Local Vibe Finder",
+  "description": "A web application that uses Gemini AI to dynamically search, extract, and categorize local events and nightlife based on a user's city.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
