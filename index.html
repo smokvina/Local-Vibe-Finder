@@ -1,43 +1,48 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr" class="">
   <head>
-    <meta charset="UTF-g" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Local Vibe Finder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       /* Custom scrollbar for webkit browsers */
-      .custom-scrollbar::-webkit-scrollbar {
-        height: 8px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: #2d3748; /* gray-800 */
-        border-radius: 10px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #4a5568; /* gray-600 */
-        border-radius: 10px;
-        border: 2px solid #2d3748; /* gray-800 */
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #718096; /* gray-500 */
-      }
+      .custom-scrollbar::-webkit-scrollbar { height: 8px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: #2d3748; /* gray-800 */ border-radius: 10px; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #4a5568; /* gray-600 */ border-radius: 10px; border: 2px solid #2d3748; /* gray-800 */ }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #718096; /* gray-500 */ }
+      /* Custom scrollbar for thin variant */
+      .custom-scrollbar-thin::-webkit-scrollbar { width: 4px; }
+      .custom-scrollbar-thin::-webkit-scrollbar-thumb { background-color: #4a5568; }
     </style>
+    <script>
+      // Enables dark mode using a class on the html tag
+      tailwind.config = {
+        darkMode: 'class',
+      };
+    </script>
+    <!-- Load Dependencies as Globals -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@google/generative-ai/dist/index.umd.js"></script>
+
+    <!-- Load Babel for in-browser JSX/TSX transpilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0"
   }
 }
 </script>
 </head>
-  <body class="bg-gray-900 text-white">
+  <body class="bg-white dark:bg-gray-900 transition-colors duration-300">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+
+    <!-- Load the App using Babel. 'data-type="module"' allows using import/export between your own files. -->
+    <script type="text/babel" data-type="module" src="./index.tsx"></script>
   </body>
 </html>

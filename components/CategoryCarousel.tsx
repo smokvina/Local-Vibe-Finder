@@ -1,4 +1,4 @@
-
+// FIX: Import React to resolve undefined namespace error.
 import React from 'react';
 import type { Event } from '../types';
 import EventCard from './EventCard';
@@ -8,6 +8,7 @@ interface CategoryCarouselProps {
     events: Event[];
 }
 
+// FIX: Corrected component type from custom 'FC' to 'React.FC' to resolve generic type error.
 const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ title, events }) => {
     if (!events || events.length === 0) {
         return null;

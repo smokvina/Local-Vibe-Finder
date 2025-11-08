@@ -1,45 +1,43 @@
-
+// FIX: Import React to resolve undefined namespace error.
 import React from 'react';
 import type { Event } from '../types';
-import { CATEGORY_MAP } from '../constants';
 
 interface EventCardProps {
     event: Event;
 }
 
+// FIX: Corrected component type from custom 'FC' to 'React.FC' to resolve generic type error.
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
-    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`;
-
     return (
-        <div className="flex-shrink-0 w-80 bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
-            <div className="p-5">
-                <div className="flex justify-between items-start">
-                    <h3 className="text-xl font-bold mb-2 text-purple-300 pr-2">{event.name}</h3>
-                     <span className="text-2xl flex-shrink-0">{CATEGORY_MAP[event.category].title.split(' ')[0]}</span>
-                </div>
-                <p className="text-sm text-gray-400 mb-3">{event.dateTime}</p>
-                <p className="text-gray-300 text-sm mb-4 h-20 overflow-y-auto custom-scrollbar">{event.description}</p>
+        <div className="flex-shrink-0 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-5 flex flex-col transform hover:-translate-y-1 transition-transform duration-300 ease-in-out">
+            {event.vibe && (
+                <span className="self-start text-xs font-bold bg-pink-500/10 dark:bg-pink-500/20 text-pink-600 dark:text-pink-400 px-2 py-1 rounded-full mb-3">
+                    {event.vibe}
+                </span>
+            )}
+            <div className="flex-grow">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 h-14 overflow-hidden">{event.name}</h3>
                 
-                <div className="space-y-3">
-                     <a 
-                        href={mapsUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-pink-400 hover:text-pink-300 transition-colors"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                        <span>{event.address}</span>
-                    </a>
-                    <a 
-                        href={event.sourceUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-block text-sm bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold py-2 px-4 rounded-lg transition-colors"
-                    >
-                        View Source
-                    </a>
-                </div>
+                <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">🗓️ {event.dateTime}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 truncate">📍 {event.address}</p>
+
+                <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 h-24 overflow-y-auto custom-scrollbar-thin">
+                    {event.description}
+                </p>
+                {event.extraDetails && (
+                    <p className="text-sm text-purple-700 dark:text-purple-300 mb-4 italic p-2 bg-purple-500/10 dark:bg-purple-900/20 rounded-md">
+                        "{event.extraDetails}"
+                    </p>
+                )}
             </div>
+            <a 
+                href={event.sourceUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="mt-auto block w-full text-center bg-purple-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-purple-700 transition-colors duration-200"
+            >
+                View Source
+            </a>
         </div>
     );
 };

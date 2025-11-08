@@ -1,4 +1,4 @@
-
+// FIX: Import React to resolve undefined namespace error.
 import React from 'react';
 
 const SearchIcon: React.FC = () => (
